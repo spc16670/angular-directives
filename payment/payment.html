@@ -1,0 +1,74 @@
+<form class="form-group" id="paymentForm" name="paymentForm" novalidate>
+	<div class="control-group">
+		<label label-default="" class="control-label">Card Holder's Name</label>
+		<div class="controls">
+			<input type="text" id="name" name="name" class="form-control" pattern="\w+ \w+.*" placeholder="Name on card" title="First and last name" required ng-model="payment.name">
+			<p ng-show="paymentForm.name.$invalid && !paymentForm.name.$pristine" class="help-block">Full name as shown on the card is required.</p>
+		</div>
+	</div>
+	<div class="control-group">
+		<label label-default="" class="control-label">Card Number</label>
+			<div class="controls">
+			<div class="row">
+				<div class="col-md-3">
+					<input type="text" class="form-control" autocomplete="off" maxlength="4" pattern="\d{4}" title="First four digits" required ng-model="payment.firstFour" numbers-only style="text-align:center;">
+				</div>
+				<div class="col-md-3">
+					<input type="text" class="form-control" autocomplete="off" maxlength="4" pattern="\d{4}" title="Second four digits" required ng-model="payment.secondFour" numbers-only style="text-align:center;">
+				</div>
+				<div class="col-md-3">
+					<input type="text" class="form-control" autocomplete="off" maxlength="4" pattern="\d{4}" title="Third four digits" required ng-model="payment.thirdFour" numbers-only style="text-align:center;">
+				</div>
+				<div class="col-md-3">
+					<input type="text" class="form-control" autocomplete="off" maxlength="4" pattern="\d{3,4}" title="Fourth four digits" required ng-model="payment.fourthFour" numbers-only style="text-align:center;">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="control-group">
+		<label label-default="" class="control-label">Card Expiry Date</label>
+		<div class="controls">
+			<div class="row">
+				<div class="col-md-9">
+					<select class="form-control" name="cc_exp_mo" ng-model="payment.expiry.month">
+						<option ng-repeat="month in months" value="{[ month.month ]}">{[ month.name ]}</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<select class="form-control" name="cc_exp_yr" ng-model="payment.expiry.year">
+						<option ng-repeat="year in years" value="{[ year ]}" >{[ year ]}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="control-group">
+		<label label-default="" class="control-label">Card CVV</label>
+		<div class="controls">
+			<div class="row">
+				<div class="col-md-3">
+					<input type="text" class="form-control" name="cvv" placeholder="CVV" autocomplete="off" maxlength="3" pattern="\d{3}" title="Three digits at back of your card" required ng-model="payment.cvv" numbers-only style="text-align:center;">
+				</div>
+				<div class="col-md-8">
+					<p ng-show="paymentForm.cvv.$invalid && !paymentForm.cvv.$pristine" class="help-block">CVV number is required.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<label label-default="" class="control-label"></label>
+		<div class="controls">
+			 <div class="row">
+				<div class="col-md-3">
+					<button type="button" class="btn btn-primary form-control" ng-click="ok()">OK</button>
+				</div>
+				<div class="col-md-9">
+					<p style="color:red;" ng-if="errorMsg.show"> {[ errorMsg.text ]} </p> 
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>
+
